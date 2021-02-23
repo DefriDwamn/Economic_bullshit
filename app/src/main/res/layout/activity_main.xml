@@ -2,126 +2,156 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFAEE"
-    android:clickable="false"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:id="@+id/frameMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonShopUpgrade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/buttonupgrade"
+                android:fontFamily="@font/roboto_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonShop"
+                app:layout_constraintTop_toBottomOf="@+id/diamond"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textdiamond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/hud2"
+                android:fontFamily="@font/roboto_mono_medium"
+                android:gravity="center"
+                android:text="@string/textDiamondName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textzavodi"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttonShop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/buttonshop"
+                android:fontFamily="@font/roboto_mono_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/buttonShopUpgrade"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/money"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/diamond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="623dp"
+                android:background="@drawable/hud22"
+                android:gravity="center"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/buttonShopUpgrade"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/zavodi"
+                app:layout_constraintTop_toBottomOf="@+id/textdiamond" />
+
+            <TextView
+                android:id="@+id/textcoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/hud1"
+                android:fontFamily="@font/roboto_mono_medium"
+                android:gravity="center"
+                android:text="@string/textMoneyName"
+                app:layout_constraintEnd_toStartOf="@+id/textzavodi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textzavodi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/hud2"
+                android:fontFamily="@font/roboto_mono_medium"
+                android:gravity="center"
+                android:text="@string/textZavodiName"
+                app:layout_constraintEnd_toStartOf="@+id/textdiamond"
+                app:layout_constraintStart_toEndOf="@+id/textcoin"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="623dp"
+                android:background="@drawable/hud11"
+                android:gravity="center"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/buttonShop"
+                app:layout_constraintEnd_toStartOf="@+id/zavodi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textcoin" />
+
+            <TextView
+                android:id="@+id/zavodi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="623dp"
+                android:background="@drawable/hud22"
+                android:gravity="center"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/buttonShopUpgrade"
+                app:layout_constraintEnd_toStartOf="@+id/diamond"
+                app:layout_constraintStart_toEndOf="@+id/money"
+                app:layout_constraintTop_toBottomOf="@+id/textzavodi" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
     <FrameLayout
         android:id="@+id/frgmCont"
-        android:layout_width="297dp"
-        android:layout_height="553dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.539">
-
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/buttonShop"
-        android:layout_width="0dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/buttonshop"
-        android:fontFamily="@font/roboto_mono_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonShopUpgrade"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonShopUpgrade"
-        android:layout_width="0dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/buttonupgrade"
-        android:fontFamily="@font/roboto_bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonShop" />
-
-    <TextView
-        android:id="@+id/textcoin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/hud1"
-        android:fontFamily="@font/roboto_mono_medium"
-        android:gravity="center"
-        android:text="@string/textMoneyName"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textdiamond"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/hud2"
-        android:fontFamily="@font/roboto_mono_medium"
-        android:gravity="center"
-        android:text="@string/textDiamondName"
-        app:layout_constraintStart_toEndOf="@+id/textcoin"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textzavodi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/hud2"
-        android:fontFamily="@font/roboto_mono_medium"
-        android:gravity="center"
-        android:text="@string/textZavodiName"
-        app:layout_constraintStart_toEndOf="@+id/textdiamond"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/money"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/hud11"
-        android:gravity="center"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textcoin" />
-
-    <TextView
-        android:id="@+id/diamond"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/hud22"
-        android:gravity="center"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/money"
-        app:layout_constraintTop_toBottomOf="@+id/textdiamond" />
-
-    <TextView
-        android:id="@+id/zavodi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/hud22"
-        android:gravity="center"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/diamond"
-        app:layout_constraintTop_toBottomOf="@+id/textzavodi" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
