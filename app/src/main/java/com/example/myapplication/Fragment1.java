@@ -18,7 +18,7 @@ import android.widget.FrameLayout;
 import com.example.myapplication.R;
 
 public class Fragment1 extends Fragment {
-    Button buttonShop, buttonShopUpgrade, buttonBackfromShop;
+    Button buttonShop, buttonShopUpgrade, buttonBackfromShop, button2;
     Animation scaleUp, scaleDown;
     FrameLayout frameMain;
 
@@ -26,13 +26,13 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_fragment2, container, false);
-
         buttonShop = getActivity().findViewById(R.id.buttonShop);
         buttonShopUpgrade = getActivity().findViewById(R.id.buttonShopUpgrade);
         buttonBackfromShop = v.findViewById(R.id.buttonBackfromShopUpgrade);
         scaleUp = AnimationUtils.loadAnimation(getActivity(), R.anim.button_scale_up);
         scaleDown = AnimationUtils.loadAnimation(getActivity(), R.anim.button_scale_down);
         frameMain = getActivity().findViewById(R.id.frameMain);
+
 
         buttonBackfromShop.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -49,8 +49,6 @@ public class Fragment1 extends Fragment {
                 return true;
             }
         });
-
-
         return v;
     }
 }
