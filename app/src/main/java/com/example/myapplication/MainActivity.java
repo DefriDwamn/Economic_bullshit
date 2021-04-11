@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Timer;
 
@@ -38,37 +40,24 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameMain;
     TextView money, zavodi, diamond;
 
-    private Locale locale;
-    private File saveFile;
-    private Data data = new Data();
-    private int saveCounter;
+    Handler handler = new Handler();
+    Runnable score_hTask;
+    DecimalFormat df = new DecimalFormat("##.##");
+    private float score;
+    private float kof;
+    public static final String APP_PREFERENCES = "Settings";
+    public static final String APP_PREFERENCES_SCORE = "score";
+    public static final String APP_PREFERENCES_KOF = "kof";
+    private SharedPreferences Settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        saveFile = new File(getFilesDir(), "save");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            locale = getResources().getConfiguration().getLocales().get(0);
-        } else {
-            locale = getResources().getConfiguration().locale;
-        }
-        if (saveFile.exists()) {
-            try {
-                data = (Data) new ObjectInputStream(new FileInputStream(saveFile))
-                        .readObject();
-                addUpgradeRows(data.getOwnedUpgrades().size());
-            } catch (IOException | ClassNotFoundException e) {
-                addUpgrade();
-            }
-        } else {
-            addUpgrade();
-        }
-        saveCounter = 0;
+        Settings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
-        ScoreUpdaterTimer scoreUpdaterTimer = new ScoreUpdaterTimer(this);
-        new Timer().scheduleAtFixedRate(scoreUpdaterTimer, 0, 50);
+        df.setRoundingMode(RoundingMode.DOWN);
 
         money = findViewById(R.id.money);
         zavodi = findViewById(R.id.zavodi);
@@ -76,8 +65,25 @@ public class MainActivity extends AppCompatActivity {
         frameMain = findViewById(R.id.frameMain);
         buttonShop = findViewById(R.id.buttonShop);
         buttonShopUpgrade = findViewById(R.id.buttonShopUpgrade);
+
         scaleUp = AnimationUtils.loadAnimation(this, R.anim.button_scale_up);
         scaleDown = AnimationUtils.loadAnimation(this, R.anim.button_scale_down);
+        kof = 1;
+        score_hTask = new Runnable()
+        {
+            @Override
+            public void run() {
+                if(score<Float.MAX_VALUE) {
+                    score = kof+score;
+                    money.setText(df.format(score)+"");
+                }
+                else {
+                    handler.removeCallbacks(score_hTask);
+                }
+                handler.postDelayed(score_hTask, 1000);
+            }
+        };
+        score_hTask.run();
 
         buttonShop.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -121,18 +127,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void incrementScore(View view) {
-        data.addScore(1.0);
-    }
-
-
     protected void onDestroy() {
         super.onDestroy();
     }
 
     protected void onPause() {
         super.onPause();
-
+        SharedPreferences.Editor editor = Settings.edit();
+        editor.putFloat(APP_PREFERENCES_SCORE, score);
+        editor.putFloat(APP_PREFERENCES_KOF, kof);
+        editor.apply();
     }
 
     protected void onRestart() {
@@ -145,6 +149,13 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+        if (Settings.contains(APP_PREFERENCES_SCORE)) {
+            score = Settings.getFloat(APP_PREFERENCES_SCORE, 0);
+            money.setText(df.format(score)+"");
+        }
+        if (Settings.contains(APP_PREFERENCES_KOF)) {
+            kof = Settings.getFloat(APP_PREFERENCES_KOF, 0);
+        }
     }
 
     protected void onSaveInstanceState(Bundle outState) {
